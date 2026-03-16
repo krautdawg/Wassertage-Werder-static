@@ -9,6 +9,8 @@
   /* Brand Colors */
   --hoffbauer-blue: #004a99;
   --hoffbauer-sky: #00a0e3;
+  --hoffbauer-red: #C41E3A;
+  --hoffbauer-green: #7CB342;
   --hoffbauer-yellow: #ffcc00;
   --hoffbauer-grey: #333333;
   --hoffbauer-white: #f8f9fa;
@@ -16,6 +18,8 @@
   /* Semantic Variables (Mapping to project variables) */
   --primary: var(--hoffbauer-blue);
   --secondary: var(--hoffbauer-sky);
+  --action: var(--hoffbauer-red);
+  --highlight: var(--hoffbauer-green);
   --accent: var(--hoffbauer-yellow);
   --foreground: var(--hoffbauer-grey);
   --background: var(--hoffbauer-white);
@@ -85,7 +89,7 @@ header {
 .logo-container img { height: 40px; }
 
 .btn-primary {
-  background-color: var(--hoffbauer-sky);
+  background-color: var(--hoffbauer-red);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius);
@@ -93,6 +97,11 @@ header {
   border: none;
   cursor: pointer;
   display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
 }
 
 .btn-accent {
@@ -110,6 +119,17 @@ header {
   background-color: #ddd;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.highlight-event {
+  background-color: var(--hoffbauer-green);
+  color: white;
+  padding: var(--spacing-card);
+  border-radius: var(--radius);
+}
+
+.highlight-event h3 {
+  color: white;
 }
 
 .hero {
