@@ -68,7 +68,7 @@ def main():
         return
 
     # Upload files
-    remote_root = "."
+    remote_root = "/wassertage-werder"
 
     # Create remote directories
     for d in ["css", "assets", "assets/rueckblick"]:
