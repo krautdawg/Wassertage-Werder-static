@@ -21,6 +21,12 @@ UPLOAD_ITEMS = [
     "assets/logo.png",
     "assets/hero.webp",
     "assets/ki-klub-logo.png",
+    "assets/rueckblick/1.jpg",
+    "assets/rueckblick/2.jpg",
+    "assets/rueckblick/3.jpg",
+    "assets/rueckblick/4.jpg",
+    "assets/rueckblick/5.jpg",
+    "assets/rueckblick/6.jpg",
 ]
 
 
@@ -34,7 +40,7 @@ def main():
     explore_mode = "--explore" in sys.argv
 
     print(f"Connecting to {USER}@{HOST}:{PORT} ...")
-    child = pexpect.spawn(f"sftp -oPort={PORT} {USER}@{HOST}", encoding="utf-8", timeout=30)
+    child = pexpect.spawn(f"sftp -oPort={PORT} -oStrictHostKeyChecking=no {USER}@{HOST}", encoding="utf-8", timeout=30)
 
     # Handle host key confirmation
     idx = child.expect(["password:", "Are you sure you want to continue connecting", pexpect.TIMEOUT], timeout=15)
@@ -57,24 +63,15 @@ def main():
         child.sendline("ls -la")
         child.expect("sftp>")
         print(child.before.strip())
-        # Try common document roots
-        for d in [".", "www", "public_html", "htdocs"]:
-            child.sendline(f"ls -la {d}")
-            child.expect("sftp>")
-            output = child.before.strip()
-            if "No such file" not in output and "not found" not in output:
-                print(f"\n[{d}/]")
-                print(output)
         child.sendline("bye")
         child.expect(pexpect.EOF)
-        print("\nDone exploring. Update REMOTE_ROOT in this script if needed.")
         return
 
-    # Upload files — default to current remote directory (STRATO typically lands in doc root)
+    # Upload files
     remote_root = "."
 
     # Create remote directories
-    for d in ["css", "assets"]:
+    for d in ["css", "assets", "assets/rueckblick"]:
         child.sendline(f"mkdir {remote_root}/{d}")
         child.expect("sftp>")
 
